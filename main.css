@@ -49,19 +49,13 @@ body {
     margin: 0;
 }
 
-.main-question {
-    background-color: white;
-    margin-top: 0px;
-    padding: 20px 50px 20px 50px;
-}
-
 .question-count, .score {
     margin: 10px;
 }
 
 .question-score {
     width: 100%;
-    background-color: darkgray;
+    background-color: darkgrey;
     padding: 5px;
     margin: 0;
     display: flex;
@@ -78,5 +72,49 @@ body {
     margin-bottom: 20px;
 }
 
+.main-answer, .main-question {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    
+}
 
+.main-question .answer-area {
+    text-align: left;
+}
 
+.question-area, .answer-area {
+    width: 100%;
+    margin: 20px;
+    padding: 20px;
+}
+
+.answer-area {
+    background-color: lightgray;
+    text-align: center;
+}
+
+.book-cover {
+    flex-grow: 0;
+    width: 100px;
+}
+
+@media screen and (min-width:600px) {
+    .main-answer, .main-question {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        background-color: white;
+        min-height: 400px;
+    }
+
+    .question-area, .answer-area {
+        width: 50%;
+        margin: 20px;
+        padding: 20px;
+    }
+}

@@ -36,31 +36,33 @@
 
         <main role="main" class="main-question">
             
-            <section class="quiz">
+            <section class="question-area">
                 <p class="question">Who wrote <span class="title">Lagoon</span> (2014)?
                 </p>
                 <p class="summary">It’s up to a famous rapper, a biologist, and a rogue soldier to handle 
                     humanity’s first contact with an alien ambassador—and prevent mass extinction—in this 
                     novel that blends magical realism with high-stakes action.
                 </p>
+            </section>
 
-                <form role="form" id="js-quiz-question">
+            <section class="answer-area">
+                <form class="answer-option-form" role="form" id="js-quiz-question">
                     <fieldset class="answer-options">
-                        <input type="radio" name="answer" id="answer-1" value="Ursula K. LeGuin">
+                        <input type="radio" name="answer" id="answer-1" value="Ursula K. LeGuin" required>
                         <label for="answer-1">Ursula K. LeGuin</label>
                         <br>
-                        <input type="radio" name="answer" id="answer-2" value="Nnedi Okorafor">
+                        <input type="radio" name="answer" id="answer-2" value="Nnedi Okorafor" required>
                         <label for="answer-2">Nnedi Okorafor</label>
                         <br>
-                        <input type="radio" name="answer" id="answer-3" value="Andy Weir">
+                        <input type="radio" name="answer" id="answer-3" value="Andy Weir" required>
                         <label for="answer-3">Andy Weir</label>
                         <br>
-                        <input type="radio" name="answer" id="answer-4" value="Robert Heinlein">
+                        <input type="radio" name="answer" id="answer-4" value="Robert Heinlein" required>
                         <label for="answer-4">Robert Heinlein</label>
                         <br>
                     </fieldset>
                     
-                    <button type="submit">submit answer</button>
+                    <button type="submit"><a href="answer.html">submit answer</a></button>
                 </form>
             </section>
         </main>
