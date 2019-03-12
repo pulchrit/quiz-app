@@ -15,31 +15,24 @@
     <!--Normalize css-->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css">
     <!--Link to Google Fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Overpass:400,400i,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bungee+Inline|Overpass:400,400i,700" rel="stylesheet">
     <!--Link to custom css-->
     <link rel="stylesheet" type="text/css" href="main.css">
 </head>
 
-<body>
+<body class="js-body">
     
     <div class="hero-screen">
-        <header role="banner" class="header">
-            
-            <h1>Who Wrote It?</h1>
-            <h2>Science Fiction and Fantasy Edition</h2>
+    <header role="banner" class="header-hero">
+        
+        <h1>Who Wrote It?</h1>
+        <h2 class="subhead">Science Fiction and Fantasy Edition</h2>
 
-        </header>  
+    </header>  
 
-        <main role="main" class="main">
-            <p class="intro-copy">Welcome to the Who Wrote It? quiz. Test your knowledge of who wrote these 
-                popular science fiction and fantasy books.
-            </p>
-            <section class="quiz">
-                <form role="form" id="js-start-quiz">
-                    <button type="submit"><a href="question.html">Start quiz</a></button>
-                </form>
-            </section>
-        </main>
+    <main role="main" class="main js-quiz-content">
+        
+    </main>
     </div>
 
     <footer role="contentinfo">
@@ -48,11 +41,13 @@
         </address>
     </footer>
 
-    <!--Links to jQuery and local Javascript script files-->
+    <!--Links to jQuery and local Javascript data and script files-->
     <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
+    <script src="questionData.js"></script>
     <script src="index.js"></script>
+    
 </body>
 </html>

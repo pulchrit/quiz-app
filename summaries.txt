@@ -39,4 +39,4 @@ source: Wikipedia https://en.wikipedia.org/w/index.php?title=Consider_Phlebas&ol
 
 Cryptonomicon (1999) Neal Stephenson
 A novel set in two different time periods. One group of characters are World War II-era Allied codebreakers and tactical-deception operatives, and disillusioned Axis military and intelligence figures. The second narrative is set in the late 1990s, with characters that are (in part) descendants of those of the earlier time period, who employ cryptologic, telecom, and computer technology to build an underground data haven.
-source: Wikipedia 
+source: Wikipedia https://en.wikipedia.org/w/index.php?title=Cryptonomicon&oldid=879555233
