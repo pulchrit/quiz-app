@@ -1,0 +1,128 @@
+/* set box model to border-box */
+html {
+    box-sizing: border-box;
+    max-width: 1500px;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+    font-family: 'Overpass', sans-serif;
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Andromeda_Collides_Milky_Way.jpg/512px-Andromeda_Collides_Milky_Way.jpg");
+    background-size: cover;
+}
+
+.hero-screen {
+    /* background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Andromeda_Collides_Milky_Way.jpg/512px-Andromeda_Collides_Milky_Way.jpg");
+    background-size: cover; */
+    width: 100%;
+    height: 500px;
+    margin: 50px 0 25px 0;
+}
+
+.question-screen {
+    background-color: #e6e4e4;
+}
+
+.header-hero, .main, footer {
+    text-align: center;
+}
+
+/* .body-question {
+    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Andromeda_Collides_Milky_Way.jpg/512px-Andromeda_Collides_Milky_Way.jpg");
+    background-size: cover;
+} */
+
+.header-question {
+    width: 100%;
+    padding: 10px;
+    height: 75px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    
+}
+
+h1 {
+    font-family: "Bungee Inline", cursive;
+    font-size: 1.75em;
+    padding: 0;
+    margin: 0;
+}
+
+h2 {
+    font-size: 1.25em;
+    padding: 0;
+    margin: 0;
+}
+
+.question-count, .score {
+    margin: 10px;
+}
+
+.question-score {
+    width: 100%;
+    background-color: darkgrey;
+    padding: 5px;
+    margin: 0;
+    display: flex;
+    flex-direction: row; 
+    justify-content: center;
+}
+
+.title {
+    font-style: italic;
+}
+
+.answer-options {
+    border: none;
+    margin-bottom: 20px;
+}
+
+.main-question {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 20px;   
+}
+
+.main-question .answer-area {
+    text-align: left;
+}
+
+.question-area, .answer-area {
+    width: 100%;
+    margin: 20px;
+    padding: 20px;
+}
+
+.answer-area {
+    background-color: lightgray;
+    text-align: center;
+}
+
+.book-cover {
+    flex-grow: 0;
+    width: 100px;
+}
+
+@media screen and (min-width:600px) {
+    .main-answer, .main-question {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        background-color: white;
+        min-height: 400px;
+    }
+
+    .question-area, .answer-area {
+        width: 50%;
+        margin: 20px;
+        padding: 20px;
+    }
+}

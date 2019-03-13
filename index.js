@@ -22,10 +22,8 @@ User stories:
     - render congratulatory message based on score (<50%, 50%, >50%, 100%)
 */
 
-// done-ish
-function renderStartScreen() {
+/* function renderStartScreen() {
     console.log('renderStartScreen');
-    // render start screen to the DOM
     $(".js-quiz-content").html(`
         <p class="intro-copy">Welcome to the Who Wrote It? quiz. Test your knowledge of who wrote these 
             popular science fiction and fantasy books.
@@ -34,9 +32,9 @@ function renderStartScreen() {
             <button type="submit">Start quiz!</button>
         </form>
         `);
-}
+} */
 
-// done-ish
+// Helper function for renderQuestion()
 function getQuestionObject(count) {
     console.log('getQuestionObject ran');
     let questionObject = questionData.find(question => question.id === count);
@@ -44,17 +42,17 @@ function getQuestionObject(count) {
 
 }
 
-// done-ish
+// Helper function for renderQuestion()
 function createQuestionString(questionObject) {
     console.log('createQuestionString ran');
     return `
         <section class="question-area">
             <p class="question">${questionObject.question}</p>
-            <p class="summary">${questionObject.summary}</p>
+            <p class="js-summary">${questionObject.summary}</p>
         </section>`;
 }
 
-// done-ish
+// Helper function for createAnswerString()
 function createIndividualAnswerString(answer, index) {
     console.log("createIndividualAnswerString ran");
     return `
@@ -63,18 +61,18 @@ function createIndividualAnswerString(answer, index) {
         <br>`;
 }
 
-// done-ish
+// Helper function for renderQuestion()
 function createAnswerString(questionObject) {
     console.log('createAnswerString ran');
-    let answerStrings = questionObject.answerOptions.map((answer, index) => {
-        createIndividualAnswerString(answer, index);
+    let answerStringsArray = questionObject.answerOptions.map((answer, index) => {
+        return createIndividualAnswerString(answer, index);
     });
-    answerStrings = answerStrings.join("");
+
     return `
         <section class="answer-area">
             <form class="answer-option-form" role="form" id="js-quiz-question">
                 <fieldset class="answer-options">
-                    ${answerStrings}
+                    ${answerStringsArray.join('\n')}
                 </fieldset>
                 
                 <button type="submit">submit answer</button>
@@ -82,15 +80,16 @@ function createAnswerString(questionObject) {
         </section>`;
 }
 
+
 function renderQuestion(count) { 
     console.log('renderQuestion ran');
     const questionObject = getQuestionObject(count);
-    // render question screen to the DOM ???????? will \n cause problems below??????????????????
-    let questionAnswerArea = `
-        ${createQuestionString(questionObject)} \\n
-        ${createAnswerString(questionObject)}`;
+    let questionAnswerArea = 
+        "<div class='question-answer-combined'>" +
+        createQuestionString(questionObject) + "\n" +
+        createAnswerString(questionObject) +
+        "</div>";
     $('.js-quiz-content').append(questionAnswerArea);
-    
 }
 
 // ????
@@ -103,42 +102,51 @@ function incrementCount(questionId) {
     return questionId++;
 }
 
-// done-ish
+// Helper function for renderCountScore()
 function createCountScoreString(count, score) {
     console.log('createCountScoreString ran');
     return `
-        <section class="question-score">
+        <section class="count-score">
             <p class="question-count">Question ${count} of 10</p> 
             <p class="score">Score: ${score} correct</p>
         </section>`;
 }
 
-// done-ish
 function renderCountScore(count, score) { 
     console.log('renderCountScore ran');
-    $(".js-quiz-content").append(createCountScoreString(count, score));
+    let countScoreString = createCountScoreString(count, score)
+    $(".js-quiz-content").html(countScoreString);
 }
 
+function changeLayout() {
+    $(".js-quiz-content").removeClass("main-start-finish").addClass("main-question-answer");
+    $(".js-header").removeClass("header-start-finish").addClass("header-question-answer");
+}
 
 function handleStartQuizClicked() {
-    console.log('handleStartQuizClicked ran');
-    $(".js-quiz-content").on('click', '#js-start-quiz', function(event) {
-        // Prevent form from submitting to server.
-        event.preventDelegation();
+    
+    $("#js-start-quiz").submit(function(event) {
+            
+        console.log('handleStartQuizClicked ran');
+        event.preventDefault();
         
-        // Reorganize page layout 
-        $(".js-body").toggleClass(".body-question");
+        // Change page layout
+        changeLayout();
+
+                /* // Reorganize page layout  FIX THIS!!!!!!!! Also, pull into a separate function? 
+        //$(".js-body").addClass(".body-question");
+        $(".js-header").removeClass(".header-hero").addClass(".header-question");
+       // $(".js-header").switchClass(".header-hero", ".header-question", 500, "easeInOutQuad");
+        $(".js-quiz-content").switchClass("main", ".main-question", 500, "easeInOutQuad");
+        //$(".js-screen").switchClass(".hero-screen", ".question-screen", 500, "easeInOutQuad"); */
         
-        // question count and score should render to the DOM (calculateScore(), calculateQuestionCount())
-        // Initiating the count at 1 and the score at 0. (Not sure if this is ok?)
+        // Render count and score to the DOM.
+        // Initiating the count at 1 and the score at 0 here when 'Start Quiz' is clicked. (Is there a better way?)
         renderCountScore(count=1, score=0); // or just (1,0), not sure if this default param will work
 
-        // Initiate count at 1 when start quick is clicked. (Again, not sure if this is ok?)
+        // Initiate count at 1 when 'Start Quiz' is clicked. (Again, is there a better way?)
         renderQuestion(count=1); // or just (1), not sure if this default param will work
-        
-    });
-   // - first question should render to the DOM
-   
+    });   
 }
 
 function handleAnswerSubmitClicked() {
@@ -176,7 +184,7 @@ function handleFinalScoreClicked() {
  **/
 function handleQuiz() {
     const questionData = getQuestionData();
-    renderStartScreen();
+    //renderStartScreen();
     
     handleStartQuizClicked();
     //renderQuestion(); don't think this needs to be here

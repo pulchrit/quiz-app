@@ -1,4 +1,3 @@
-/* set box model to border-box */
 html {
     box-sizing: border-box;
     max-width: 1500px;
@@ -10,64 +9,109 @@ html {
 
 body {
     font-family: 'Overpass', sans-serif;
-}
-
-.hero-screen {
     background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Andromeda_Collides_Milky_Way.jpg/512px-Andromeda_Collides_Milky_Way.jpg");
     background-size: cover;
-    width: 100%;
-    height: 500px;
-    margin: 50px 0 25px 0;
+    background-repeat: no-repeat;
+    background-color: #000000;
 }
 
-.header-hero, .main, footer {
-    text-align: center;
-}
-
-.body-question {
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Andromeda_Collides_Milky_Way.jpg/512px-Andromeda_Collides_Milky_Way.jpg");
-    background-size: cover;
-}
-
-.header-question {
-    width: 100%;
-    padding: 10px;
-    height: 75px;
+.body-start-finish-screen {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-    
+    justify-items: center;
+    align-items: center;
+}
+
+.main-start-finish {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+}
+
+.main-question-answer {
+    background-color: rgba(255, 243, 224, .5);
+    border-bottom: 5px solid #29B6F6;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.question-answer-combined {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-start-finish {
+    text-align: center;
+    margin-top: 15%;
+    margin-bottom: 5px;
+}
+
+.header-question-answer {
+    align-self: flex-start;
+    margin: 10px; 
+}
+
+h1, .subhead, .intro-copy {
+    text-shadow:    -1px -1px 0 #000,
+                    1px -1px 0 #000,
+                    -1px 1px 0 #000,
+                    1px 1px 0 #000;
 }
 
 h1 {
     font-family: "Bungee Inline", cursive;
-    font-size: 1.75em;
-    padding: 0;
+    font-size: 1.85em;
+    color: #FBEEE6;
     margin: 0;
 }
 
-h2 {
+.subhead {
     font-size: 1.25em;
-    padding: 0;
+    color: #FBEEE6;
     margin: 0;
+}
+
+.intro-copy {
+    text-align: center;
+    font-size: 1.2em;
+    color: #FBEEE6;
+    width: 65%;
 }
 
 .question-count, .score {
     margin: 10px;
 }
 
-.question-score {
+.count-score {
     width: 100%;
-    background-color: darkgrey;
-    padding: 5px;
+    background-color: #29B6F6;
+    padding: 2px 5px;
     margin: 0;
     display: flex;
     flex-direction: row; 
     justify-content: center;
 }
 
+
+
+.question-area, .answer-area {
+    width: 85%;
+    /* margin: 20px; */
+    padding: 20px 0 20px 0;
+}
+
 .title {
     font-style: italic;
+}
+
+.answer-option-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 }
 
 .answer-options {
@@ -75,29 +119,9 @@ h2 {
     margin-bottom: 20px;
 }
 
-.main-answer, .main-question {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    padding: 20px;
-    
-}
-
-.main-question .answer-area {
-    text-align: left;
-}
-
-.question-area, .answer-area {
-    width: 100%;
-    margin: 20px;
-    padding: 20px;
-}
-
-.answer-area {
-    background-color: lightgray;
-    text-align: center;
+button[type="submit"] {
+    background-color: #29B6F6;
+    border: none;
 }
 
 .book-cover {
@@ -105,19 +129,36 @@ h2 {
     width: 100px;
 }
 
-@media screen and (min-width:600px) {
-    .main-answer, .main-question {
+.footer {
+    margin-top: 25%;
+    text-align: center;
+}
+
+.footer address, .footer a:link, .footer a:visited, .footer a:active {
+    font-size: .9em;
+    font-style: inherit;
+    color: #FBEEE6; 
+}
+
+.footer a:hover, .footer a:focus {
+    text-shadow: 2px 2px 2px #873600;
+}
+
+@media screen and (min-width: 600px) {
+    
+    .question-answer-combined {
         display: flex;
         flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
-        background-color: white;
-        min-height: 400px;
+        justify-content: space-around; 
+        align-items: center;
+        min-height: 300px;
     }
 
     .question-area, .answer-area {
         width: 50%;
         margin: 20px;
-        padding: 20px;
+        padding: 20px 40px 20px 40px;
     }
 }
+
+
