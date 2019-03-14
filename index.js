@@ -100,7 +100,7 @@ function createCountScoreString() {
     console.log('createCountScoreString ran');
     return `
         <section class="count-score">
-            <p class="question-count">Question ${countScoreTracking.count} of 10</p> 
+            <p class="question-count">Question ${countScoreTracking.count} of ${questionData.length}</p> 
             <p class="score">Score: ${countScoreTracking.score} correct</p>
         </section>`;
 }
@@ -114,8 +114,11 @@ function renderCountScore() {
 
 // Helper function for handleStartQuizClicked()
 function changeLayout() {
-    $(".js-quiz-content").removeClass("main-start-finish").addClass("main-question-answer");
-    $(".js-header").removeClass("header-start-finish").addClass("header-question-answer");
+    $(".js-quiz-content").toggleClass("main-start-finish main-question-answer");
+    $(".js-header").toggleClass("header-start-finish header-question-answer");
+
+    //$(".js-quiz-content").removeClass("main-start-finish").addClass("main-question-answer");
+    //$(".js-header").removeClass("header-start-finish").addClass("header-question-answer");
 }
 
 function handleStartQuizClicked() {
@@ -204,15 +207,45 @@ function handleAnswerSubmitClicked() {
 function handleNextQuestionClicked() {
     console.log('handleNextQuestionClicked ran');
     //- render the next question to the DOM (renderQuestion() same as above!)
-    $()
-    "#js-next-question"
+    $(".js-quiz-content").on('click', '#js-next-question', function(event) {
+        
+        // Increment question count. 
+        countScoreTracking.incrementCount();
+        
+        // Render count and score to the DOM.
+        renderCountScore(countScoreTracking.count, countScoreTracking.score); 
+
+        // Render question and answer options to the DOM.
+        renderQuestion(countScoreTracking.count); 
+    
+    });
 }
 
 function handleFinalScoreClicked() {
     console.log('handleFinalScoreClicked ran');
-    //- layout should change back to start screen layout and styling
-    //- render final score to the DOM (it should be calculated already?)
-    //- render congratulatory message based on score (<50%, 50%, >50%, 100%)
+    
+    $(".js-quiz-content").on('click', "#js-get-final-score", function(event) {
+        
+        // Change back to start screen layout and styling.
+        changeLayout();
+
+        const finalScore = countScoreTracking.score / questionData.length;
+
+        const scoreMessage = 
+            (finalScore === .5) ? "Not too bad!" : 
+            (finalScore < .5) ? "Seems like you're not a fan of science fiction." :
+            (finalScore > .5 && finalScore < 1) ? "Wow! Well done!" :
+            "Amazing. You are defnitely a fan of science fiction!";
+
+        $(".js-quiz-content").html(
+            `<p class="intro-copy">You got ${countScoreTracking.score} correct.</p>
+            <p class="intro-copy">${scoreMessage}</p>
+            <p class="intro-copy">Would you like to play again?</p>
+            <form role="form" id="js-start-quiz">
+                <button type="submit">start quiz</button>
+            </form> `
+        )
+    });
 }
 
 
