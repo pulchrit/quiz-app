@@ -22,24 +22,11 @@ User stories:
     - render congratulatory message based on score (<50%, 50%, >50%, 100%)
 */
 
-/* function renderStartScreen() {
-    console.log('renderStartScreen');
-    $(".js-quiz-content").html(`
-        <p class="intro-copy">Welcome to the Who Wrote It? quiz. Test your knowledge of who wrote these 
-            popular science fiction and fantasy books.
-        </p>
-        <form role="form" id="js-start-quiz">
-            <button type="submit">Start quiz!</button>
-        </form>
-        `);
-} */
-
 // Helper function for renderQuestion()
-function getQuestionObject(count) {
+function getQuestionObject(questionID) {
     console.log('getQuestionObject ran');
-    let questionObject = questionData.find(question => question.id === count);
+    let questionObject = questionData.find(question => question.id === questionID);
     return questionObject;
-
 }
 
 // Helper function for renderQuestion()
@@ -61,8 +48,8 @@ function createIndividualAnswerString(answer, index) {
         <br>`;
 }
 
-// Helper function for renderQuestion()
-function createAnswerString(questionObject) {
+// Helper function for renderAnswerArea()
+function createAnswerOptionsString(questionObject) {
     console.log('createAnswerString ran');
     let answerStringsArray = questionObject.answerOptions.map((answer, index) => {
         return createIndividualAnswerString(answer, index);
@@ -70,54 +57,62 @@ function createAnswerString(questionObject) {
 
     return `
         <section class="answer-area">
-            <form class="answer-option-form" role="form" id="js-quiz-question">
+            <form class="answer-option-form" role="form" id="js-quiz-question" data-questionid="${questionObject.id}">
                 <fieldset class="answer-options">
                     ${answerStringsArray.join('\n')}
                 </fieldset>
                 
-                <button type="submit">submit answer</button>
+                <button type="submit" id="js-submit-answer">submit answer</button>
             </form>
         </section>`;
 }
 
-
+// Helper function for handleStartQuizClicked()
 function renderQuestion(count) { 
     console.log('renderQuestion ran');
     const questionObject = getQuestionObject(count);
     let questionAnswerArea = 
-        "<div class='question-answer-combined'>" +
+        "<div class='question-answer-combined js-question-answer-combined'>" +
         createQuestionString(questionObject) + "\n" +
-        createAnswerString(questionObject) +
+        createAnswerOptionsString(questionObject) +
         "</div>";
     $('.js-quiz-content').append(questionAnswerArea);
 }
 
-// ????
-function incrementScore(score) {
-    return score++;
-}
 
-// ?????
-function incrementCount(questionId) {
-    return questionId++;
-}
+// Creating object to hold count and score...I think this is not a great way 
+// to handle this because this object is a global variable, but I'm not quite 
+// sure of the better way to manage it just yet... 
+const countScoreTracking = {
+    count: 1,
+    score: 0,
+    incrementScore: function() {
+        countScoreTracking.score++;
+    },
+    incrementCount: function() {
+        countScoreTracking.count++;
+    },
+ };
+
 
 // Helper function for renderCountScore()
-function createCountScoreString(count, score) {
+function createCountScoreString() {
     console.log('createCountScoreString ran');
     return `
         <section class="count-score">
-            <p class="question-count">Question ${count} of 10</p> 
-            <p class="score">Score: ${score} correct</p>
+            <p class="question-count">Question ${countScoreTracking.count} of 10</p> 
+            <p class="score">Score: ${countScoreTracking.score} correct</p>
         </section>`;
 }
 
-function renderCountScore(count, score) { 
+// Helper function for handleStartQuizClicked(), handleAnswerSubmitClicked()
+function renderCountScore() { 
     console.log('renderCountScore ran');
-    let countScoreString = createCountScoreString(count, score)
+    let countScoreString = createCountScoreString();
     $(".js-quiz-content").html(countScoreString);
 }
 
+// Helper function for handleStartQuizClicked()
 function changeLayout() {
     $(".js-quiz-content").removeClass("main-start-finish").addClass("main-question-answer");
     $(".js-header").removeClass("header-start-finish").addClass("header-question-answer");
@@ -130,41 +125,87 @@ function handleStartQuizClicked() {
         console.log('handleStartQuizClicked ran');
         event.preventDefault();
         
-        // Change page layout
+        // Change page layout to display questions and answer layout and styling.
         changeLayout();
-
-                /* // Reorganize page layout  FIX THIS!!!!!!!! Also, pull into a separate function? 
-        //$(".js-body").addClass(".body-question");
-        $(".js-header").removeClass(".header-hero").addClass(".header-question");
-       // $(".js-header").switchClass(".header-hero", ".header-question", 500, "easeInOutQuad");
-        $(".js-quiz-content").switchClass("main", ".main-question", 500, "easeInOutQuad");
-        //$(".js-screen").switchClass(".hero-screen", ".question-screen", 500, "easeInOutQuad"); */
         
         // Render count and score to the DOM.
-        // Initiating the count at 1 and the score at 0 here when 'Start Quiz' is clicked. (Is there a better way?)
-        renderCountScore(count=1, score=0); // or just (1,0), not sure if this default param will work
+        renderCountScore(countScoreTracking.count, countScoreTracking.score); 
 
-        // Initiate count at 1 when 'Start Quiz' is clicked. (Again, is there a better way?)
-        renderQuestion(count=1); // or just (1), not sure if this default param will work
+        // Render question and answer options to the DOM.
+        renderQuestion(countScoreTracking.count);        
     });   
 }
+// Helper function for handleAnswerSubmitClicked();
+function checkAnswer(userAnswer, questionID) {
+    console.log("checkAnswer ran");
+    
+    let questionObject = getQuestionObject(questionID);
 
+    // Create an array to return that holds the message and questionObject.
+    const result = [questionObject];
+    
+    // If answered correctly
+    if (questionObject.correctAnswer === userAnswer) {
+        
+        result.unshift("Correct!"); 
+        countScoreTracking.incrementScore();
+        return result;
+    } else {
+        
+        result.unshift("Sorry, that is incorrect.");
+        return result;
+    } 
+}
+
+// Helper function for handleAnswerSubmitClicked()
+function renderAnswerFeedback(answerInfo) {
+    console.log("renderAnswerFeedback ran");
+    // answerInfo is [message, {questionObject}]
+    // Re-render the question
+    renderQuestion(answerInfo[1].id);
+    
+    // Append Source link to question summary.
+    $(".js-summary").append(` <a href=${answerInfo[1].answerSource}>Source</a>`);
+
+    // Set Button text appropriately based on number of questions.
+    let buttonString;
+    if (countScoreTracking.count === questionData.length) {
+        buttonString = "<button type='submit' id='js-get-final-score'>get final score</button>";
+    } else {
+        buttonString = "<button type='submit' id='js-next-question'>next question</button>";
+    }
+
+    // Replace answer options with answer feedback.
+    $("#js-quiz-question").html(
+        `<p>${answerInfo[0]}</p>
+        <p>${answerInfo[1].correctAnswer} wrote <span class="title">${answerInfo[1].title}</span>.</p>
+        <img class="book-cover" src="${answerInfo[1].coverImage}" alt="Cover of ${answerInfo[1].title}">
+        <br>
+        ${buttonString}`
+    );    
+}
+
+ 
 function handleAnswerSubmitClicked() {
-    console.log('handleAnswerSubmitClicked ran');
-    //- an answer must be selected (tried to do this with html required) 
+    
     //- on submit click, the selected answer should be saved to a variable
-    //- get id of question from DOM, pull corresponding object from data store or pull corresponding answer only?)
-    //- determine if answer is correct (compare selected answer vs. answer looked up in data store)
-    //    - if correct, render appropriate message, answer and book cover to DOM
-    //    - if incorrect, render appropriate message, answer and book cover to DOM
-    //- calcuateScore and render to DOM
-    //- calculateQuestionCount and render to DOM
-    //    - if this is the last question, the next question button should be changed to 'see final score'
+    // Attribution: https://www.tutorialrepublic.com/faq/how-to-get-the-value-of-selected-radio-button-using-jquery.php
+    $(".js-quiz-content").on('click', '#js-submit-answer', function(event) {
+        event.preventDefault();
+        console.log('handleAnswerSubmitClicked ran');
+        let userAnswer = $("input[name='answer']:checked").val();
+        let questionID = $(this).closest("form").data("questionid");
+        let answerInfo = checkAnswer(userAnswer, questionID);
+        renderCountScore();
+        renderAnswerFeedback(answerInfo);   
+    });
 }
 
 function handleNextQuestionClicked() {
     console.log('handleNextQuestionClicked ran');
     //- render the next question to the DOM (renderQuestion() same as above!)
+    $()
+    "#js-next-question"
 }
 
 function handleFinalScoreClicked() {
@@ -184,10 +225,8 @@ function handleFinalScoreClicked() {
  **/
 function handleQuiz() {
     const questionData = getQuestionData();
-    //renderStartScreen();
     
     handleStartQuizClicked();
-    //renderQuestion(); don't think this needs to be here
     handleAnswerSubmitClicked();
     handleNextQuestionClicked();
     handleFinalScoreClicked();

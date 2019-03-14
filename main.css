@@ -10,6 +10,7 @@ html {
 body {
     font-family: 'Overpass', sans-serif;
     background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Andromeda_Collides_Milky_Way.jpg/512px-Andromeda_Collides_Milky_Way.jpg");
+    /* image via Wikimedia Commons https://commons.wikimedia.org/wiki/File:Andromeda_Collides_Milky_Way.jpg */
     background-size: cover;
     background-repeat: no-repeat;
     background-color: #000000;
@@ -41,7 +42,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
+} 
 
 .header-start-finish {
     text-align: center;
@@ -96,10 +97,8 @@ h1 {
 }
 
 
-
 .question-area, .answer-area {
     width: 85%;
-    /* margin: 20px; */
     padding: 20px 0 20px 0;
 }
 
@@ -111,12 +110,13 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    text-align: center;
 }
 
 .answer-options {
     border: none;
     margin-bottom: 20px;
+    text-align: left;
 }
 
 button[type="submit"] {
@@ -127,6 +127,8 @@ button[type="submit"] {
 .book-cover {
     flex-grow: 0;
     width: 100px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .footer {
