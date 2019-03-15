@@ -22,6 +22,7 @@ body {
     justify-items: center;
     align-items: center;
     width: 100%;
+    max-width: 1500px;
 }
 
 .main-start-finish {
