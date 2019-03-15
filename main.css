@@ -122,6 +122,18 @@ h1 {
 button[type="submit"] {
     background-color: #29B6F6;
     border: none;
+    box-shadow: 1px 1px 1px rgba(251, 238, 230, .25),
+                -1px -1px 1px rgba(251, 238, 230, .25),
+                -1px 1px 1px rgba(251, 238, 230, .25),
+                1px -1px 1px rgba(251, 238, 230, .25);
+}
+
+.source-link:link, .source-link:visited, .source-link:active {
+    color: #1A237E;
+}
+
+.source-link:hover, .source-link:focus {
+    text-decoration: underline wavy #1A237E;
 }
 
 .book-cover {
