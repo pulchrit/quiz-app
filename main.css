@@ -14,8 +14,9 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-color: #000000;
-    max-width: 1500px;
-    width: 100%;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto:
 }
 
 .body-start-finish-screen {
@@ -23,8 +24,9 @@ body {
     flex-direction: column;
     justify-items: center;
     align-items: center;
-    max-width: 1500px;
-    width: 100%;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto:
     
 }
 
