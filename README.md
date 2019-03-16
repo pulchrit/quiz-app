@@ -7,5 +7,7 @@ Test your knowledge of these 10 science fiction and fantasy books with this inte
 - Javascript 
 - jQuery
 
+Link to [live site](https://github.com/pulchrit/quiz-app "Who Wrote It? Quiz").
+
 
 
