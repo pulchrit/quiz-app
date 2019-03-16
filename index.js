@@ -53,7 +53,7 @@ function createAnswerOptionsString(questionObject) {
     console.log('createAnswerString ran');
     let answerStringsArray = questionObject.answerOptions.map((answer, index) => {
         return createIndividualAnswerString(answer, index);
-    });
+    }); 
 
     return `
         <section class="answer-area">

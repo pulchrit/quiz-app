@@ -120,7 +120,7 @@ h1 {
 
 .individual-answers {
     display: block;
-    cursor: pointer;
+    cursor: pointer; 
 }
 
 button[type="submit"] {
