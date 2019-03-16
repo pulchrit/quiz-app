@@ -43,9 +43,9 @@ function createQuestionString(questionObject) {
 function createIndividualAnswerString(answer, index) {
     console.log("createIndividualAnswerString ran");
     return `
-        <input type="radio" name="answer" id="answer-${index}" value="${answer}" required>
-        <label for="answer-${index}">${answer}</label>
-        <br>`;
+        <label class="individual-answers">
+            <input type="radio" name="answer" id="answer-${index}" value="${answer}" required>
+        ${answer}</label>`
 }
 
 // Helper function for renderQuestion()

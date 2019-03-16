@@ -118,7 +118,13 @@ h1 {
     text-align: left;
 }
 
+.individual-answers {
+    display: block;
+    cursor: pointer;
+}
+
 button[type="submit"] {
+    cursor: pointer;
     background-color: #29B6F6;
     border: none;
     box-shadow: 1px 1px 1px rgba(251, 238, 230, .25),
@@ -133,6 +139,7 @@ button[type="submit"] {
 
 .source-link:hover, .source-link:focus {
     text-decoration: underline wavy #1A237E;
+    cursor: pointer;
 }
 
 .book-cover {
@@ -155,6 +162,7 @@ button[type="submit"] {
 
 .footer a:hover, .footer a:focus {
     text-shadow: 2px 2px 2px #873600;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 600px) {
