@@ -120,7 +120,7 @@ h1 {
 
 .individual-answers {
     display: block;
-    cursor: pointer; 
+    cursor: pointer;  
 }
 
 button[type="submit"] {
@@ -139,7 +139,7 @@ button[type="submit"] {
 
 .source-link:hover, .source-link:focus {
     text-decoration: underline wavy #1A237E;
-    cursor: pointer;
+    cursor: pointer; 
 }
 
 .book-cover {
@@ -162,7 +162,7 @@ button[type="submit"] {
 
 .footer a:hover, .footer a:focus {
     text-shadow: 2px 2px 2px #873600;
-    cursor: pointer;
+    cursor: pointer; 
 }
 
 @media screen and (min-width: 600px) {
