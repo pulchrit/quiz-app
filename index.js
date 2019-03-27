@@ -25,13 +25,11 @@ User stories:
 
 // Helper function for renderQuestion()
 function getQuestionObject(questionID) {
-    console.log('getQuestionObject ran');
     return questionData.find(question => question.id === questionID);
 }
 
 // Helper function for renderQuestion()
 function createQuestionString(questionObject) {
-    console.log('createQuestionString ran');
     return `
         <section class="question-area">
             <p class="question">${questionObject.question}</p>
@@ -41,7 +39,6 @@ function createQuestionString(questionObject) {
 
 // Helper function for createAnswerString()
 function createIndividualAnswerString(answer, index) {
-    console.log("createIndividualAnswerString ran");
     return `
         <label class="individual-answers">
             <input type="radio" name="answer" id="answer-${index}" value="${answer}" required>
@@ -50,7 +47,6 @@ function createIndividualAnswerString(answer, index) {
 
 // Helper function for renderQuestion()
 function createAnswerOptionsString(questionObject) {
-    console.log('createAnswerString ran');
     let answerStringsArray = questionObject.answerOptions.map((answer, index) => {
         return createIndividualAnswerString(answer, index);
     }); 
@@ -68,7 +64,6 @@ function createAnswerOptionsString(questionObject) {
 
 // Helper function for handleStartQuizClicked()
 function renderQuestion(count) { 
-    console.log('renderQuestion ran');
     const questionObject = getQuestionObject(count);
     let questionAnswerArea = 
         "<div class='question-answer-combined js-question-answer-combined'>" +
@@ -94,7 +89,6 @@ const countScoreTracking = {
 
 // Helper function for renderCountScore()
 function createCountScoreString() {
-    console.log('createCountScoreString ran');
     return `
         <section class="count-score">
             <p class="question-count">Question ${countScoreTracking.count} of ${questionData.length}</p> 
@@ -104,7 +98,6 @@ function createCountScoreString() {
 
 // Helper function for handleStartQuizClicked(), handleAnswerSubmitClicked()
 function renderCountScore() { 
-    console.log('renderCountScore ran');
     let countScoreString = createCountScoreString();
     $(".js-quiz-content").html(countScoreString);
 }
@@ -117,9 +110,7 @@ function changeLayout() {
 }
 
 function handleStartQuizClicked() { 
-    $("#js-start-quiz").submit(function(event) {    
-        console.log('handleStartQuizClicked ran');
-       
+    $("#js-start-quiz").submit(function(event) {           
         event.preventDefault();
         changeLayout();
         renderCountScore(countScoreTracking.count, countScoreTracking.score); 
@@ -127,9 +118,7 @@ function handleStartQuizClicked() {
     });   
 }
 // Helper function for handleAnswerSubmitClicked();
-function checkAnswer(userAnswer, questionID) {
-    console.log("checkAnswer ran");
-    
+function checkAnswer(userAnswer, questionID) {    
     let questionObject = getQuestionObject(questionID);
 
     // Create an array to return that holds the message and questionObject.
@@ -149,7 +138,6 @@ function checkAnswer(userAnswer, questionID) {
 
 // Helper function for handleAnswerSubmitClicked()
 function renderAnswerFeedback(answerInfo) {
-    console.log("renderAnswerFeedback ran");
     
     // answerInfo is [message, {questionObject}]
     // Re-render the question...Room for improvement here. I have to re-render the question
@@ -191,7 +179,6 @@ function renderAnswerFeedback(answerInfo) {
  
 function handleAnswerSubmitClicked() {
     $(".js-quiz-content").on('submit', '#js-submit-answer', function(event) {
-        console.log('handleAnswerSubmitClicked ran');
         
         event.preventDefault();
         // On submit click, the selected answer should be saved to a variable
@@ -206,7 +193,6 @@ function handleAnswerSubmitClicked() {
 
 function handleNextQuestionClicked() {
     $(".js-quiz-content").on('submit', '#js-next-question', function(event) {
-        console.log('handleNextQuestionClicked ran');
 
         event.preventDefault();
         countScoreTracking.incrementCount();
@@ -217,7 +203,6 @@ function handleNextQuestionClicked() {
 
 function handleFinalScoreClicked() {
     $(".js-quiz-content").on('submit', "#js-get-final-score", function(event) {
-        console.log('handleFinalScoreClicked ran');
 
         event.preventDefault();
         changeLayout();
